@@ -1,13 +1,15 @@
 services:
   - type: web
-    name: chat-backend
-    env: node
-    buildCommand: cd server && npm install
-    startCommand: cd server && node index.js
+    name: tafatafa-backend
+    runtime: node
+    repo: https://github.com/tsiresydev/Tafatafa.git
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /health
     envVars:
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET
-        sync: false
-      - key: PORT
-        value: 10000
+        generateValue: true
+    autoDeploy: true

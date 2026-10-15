@@ -31,6 +31,8 @@ const reportSchema = new mongoose.Schema({
 }, { timestamps: true });
 const Report = mongoose.model('Report', reportSchema);
 
+app.get('/health', (req, res) => res.json({ status: 'ok', db: mongoose.connection.readyState === 1 ? 'up' : 'down' }));
+
 app.post('/auth/register', async (req, res) => {
   const { name, email, password } = req.body;
   if (!email || !password) return res.status(400).json({ error: 'Missing fields' });
